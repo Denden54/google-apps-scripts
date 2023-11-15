@@ -36,7 +36,9 @@ function scanDrive() {
   function processItem(item, path) {
     const sharedUsers = item.getEditors().concat(item.getViewers()).map(user => user.getEmail());
     const filteredUsers = sharedUsers.filter(email => !excludeAddresses.includes(email));
-    sheet.appendRow([item.getName(), filteredUsers.join(', '), path]);
+    if (filteredUsers.length > 0) {
+      sheet.appendRow([item.getName(), filteredUsers.join(', '), path]);
+    }
   }
 }
 
